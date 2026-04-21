@@ -2,9 +2,9 @@
 
 ## 🚀 Overview
 
-MiniShell is a simplified implementation of a Linux shell written in **C**. It acts as a command-line interpreter that reads user input, parses it, and executes commands using Linux system calls.
+MiniShell is a custom implementation of a Linux shell written in **C**. It works as a command-line interpreter that reads user input, parses it, and executes commands using Linux system calls.
 
-This project demonstrates core **Operating System concepts** such as process creation, execution, and synchronization.
+This project demonstrates key **Operating System concepts** such as process creation, execution, inter-process communication, and synchronization.
 
 ---
 
@@ -12,10 +12,12 @@ This project demonstrates core **Operating System concepts** such as process cre
 
 * ✅ Execute system commands (`ls`, `pwd`, `echo`, etc.)
 * ✅ Built-in commands: `cd`, `exit`
-* ✅ Input parsing and tokenization
+* ✅ Command parsing and tokenization
 * ✅ Process creation using `fork()`
 * ✅ Command execution using `exec()` family
 * ✅ Parent process synchronization using `wait()`
+* ✅ Pipe (`|`) support for inter-process communication
+* ✅ Background execution (`&`)
 * ✅ Error handling for invalid commands
 
 ---
@@ -23,6 +25,7 @@ This project demonstrates core **Operating System concepts** such as process cre
 ## 🧠 Concepts Used
 
 * Process Management (`fork`, `exec`, `wait`)
+* Inter-Process Communication (Pipes)
 * Linux System Calls
 * File Descriptors & I/O Handling
 * String Parsing in C
@@ -43,31 +46,26 @@ This project demonstrates core **Operating System concepts** such as process cre
 ```
 MiniShell/
 │── main.c
-│── parser.c
-│── execute.c
-│── builtins.c
-│── headers.h
-│── Makefile
+│── command.c
+│── external.c
+│── internal.c
+│── scan_input.c
+│── header.h
+│── ext_cmd.txt
+│── a.out
 ```
 
 ---
 
 ## ▶️ How to Run
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/minishell.git
-cd minishell
-```
-
-### 2. Compile the code
+### 1. Compile the code
 
 ```bash
 gcc *.c -o minishell
 ```
 
-### 3. Run the shell
+### 2. Run the shell
 
 ```bash
 ./minishell
@@ -82,6 +80,8 @@ MiniShell$ ls
 MiniShell$ pwd
 MiniShell$ cd ..
 MiniShell$ echo Hello World
+MiniShell$ ls | grep .c
+MiniShell$ sleep 5 &
 MiniShell$ exit
 ```
 
@@ -89,44 +89,34 @@ MiniShell$ exit
 
 ## ⚠️ Limitations
 
-* ❌ No pipe (`|`) support
-* ❌ No input/output redirection (`>`, `<`)
-* ❌ No background execution (`&`)
-* ❌ No command history
+* ❌ No command history support
+* ❌ Limited handling of complex edge cases
 
 ---
 
 ## 🔮 Future Enhancements
 
-* 🔹 Implement piping (`|`)
-* 🔹 Add I/O redirection
-* 🔹 Support background processes
-* 🔹 Add command history feature
-* 🔹 Improve error handling and UI
+* 🔹 Add command history
+* 🔹 Improve error handling
+* 🔹 Support environment variables
 
 ---
 
 ## 🧩 Challenges Faced
 
-* Handling process synchronization correctly
-* Managing invalid and edge-case inputs
-* Debugging segmentation faults
-* Designing modular and scalable code
+* Handling multiple processes with pipes
+* Managing background processes efficiently
+* Preventing zombie processes
+* Debugging segmentation faults and parsing issues
 
 ---
 
 ## 📚 Learning Outcomes
 
-* Deep understanding of how shells work internally
+* Understanding of shell internals
 * Hands-on experience with Linux system calls
-* Improved debugging and problem-solving skills
-* Strong foundation in system-level programming
-
----
-
-## 🙏 Acknowledgements
-
-Special thanks to my mentors for their guidance and support throughout this project.
+* Strong debugging and problem-solving skills
+* Practical knowledge of process communication
 
 ---
 
@@ -138,4 +128,4 @@ Special thanks to my mentors for their guidance and support throughout this proj
 
 ## 📂 GitHub Repository
 
-👉 https://github.com/your-username/minishell
+👉 https://github.com/shubhamchaudhari007/minishell
